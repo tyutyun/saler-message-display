@@ -1,0 +1,30 @@
+#selectLengend {
+    background-color: rgb(44, 44, 44);
+    color:#fff;
+}
+#selectArea {
+    width:250px;
+    float:left;
+}
+#selectProduct {
+    width:250px;
+    float:left;
+}
+table{
+    width:100%;
+    border: 1px solid #111;
+    border-collapse:collapse;
+}
+th{
+    height:34px;
+    text-align: center;
+    vertical-align: center;
+    background-color: #222;
+    color:#fff;
+}
+td{
+    height:34px;
+    border: 1px solid #111;
+    text-align: center;
+    vertical-align: center;
+}
