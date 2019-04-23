@@ -124,7 +124,7 @@ function tableHtmlGenerator(selectedRegion,selectedProduct, filtered_data) {
     else{
         table_html = "<table>\
         <tr>\
-            <th>商品</th><th>地区</th><th>1月</th><th>月</th><th>3月</th><th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th>\
+            <th>商品</th><th>地区</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th>\
         </tr>"
         for(i in filtered_data)
         {
