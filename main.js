@@ -115,7 +115,7 @@ function tableHtmlGenerator(selectedRegion,selectedProduct, filtered_data) {
             table_html =table_html +"<td>"+filtered_data[i].product+"</td>";
             for(var j in filtered_data[i].sale)
             {
-                table_html =table_html +"<td>"+filtered_data[i].sale[j]+"</td>";
+                table_html =table_html +"<td>"+"<input type=\"number\" class=\"tableInput\" value="+filtered_data[i].sale[j]+">"+"</td>";
             }
             table_html =table_html +"</tr>";
         }
@@ -139,7 +139,7 @@ function tableHtmlGenerator(selectedRegion,selectedProduct, filtered_data) {
             table_html =table_html +"<td>"+filtered_data[i].region+"</td>";
             for(var j in filtered_data[i].sale)
             {
-                table_html =table_html +"<td>"+filtered_data[i].sale[j]+"</td>";
+                table_html =table_html +"<td>"+"<input type=\"number\" class=\"tableInput\" value="+filtered_data[i].sale[j]+">"+"</td>";
             }
             table_html =table_html +"</tr>";
         }
