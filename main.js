@@ -1,8 +1,17 @@
 var areaList=["华东","华南","华北"];
 var productList=["手机","笔记本","智能音箱"];
+
 window.onload=function(){
     produceCheckBox("selectArea",areaList);
     produceCheckBox("selectProduct",productList);
+    if (localStorage.table!=undefined)
+    {
+        sourceData =  JSON.parse(localStorage.getItem('table'));
+    }
+    else{
+        window.localStorage['table'] = JSON.stringify(sourceData);
+        alert("第一次加载");
+    }
 };
 
 var selectArea=document.querySelector("#selectArea");
@@ -10,11 +19,35 @@ var fieldset=document.querySelector("fieldset");
 var selectedRegion=[];
 var selectedProduct=[];
 var selectedData=[];
-fieldset.onclick=function(){
+fieldset.onclick=function(e){
     selectedData=filterSaleData(selectedProduct,selectedRegion,sourceData);
     var table_wrapper=document.querySelector("#table-wrapper");
     table_wrapper.innerHTML= tableHtmlGenerator(selectedRegion,selectedProduct,selectedData);
+    var numInput=document.querySelectorAll(".tableInput[data-product]");
+    if(numInput!=undefined)
+    {
+        for(var numInputIndex=0,len=numInput.length;numInputIndex<len;numInputIndex++)
+        {
+            numInput[numInputIndex].oninput=function(numInputIndex){
+                return function(){
+                    console.log("onblur");
+                    for(i in sourceData)
+                    {
+                        if(sourceData[i].product==numInput[numInputIndex].dataset.product&&
+                            sourceData[i].region==numInput[numInputIndex].dataset.region)
+                        {
+                            sourceData[i].sale[numInput[numInputIndex].dataset.mouth]=Number(numInput[numInputIndex].value);
+                        }
+                    }
+                    window.localStorage['table'] = JSON.stringify(sourceData);
+                }
+                
+            }(numInputIndex);
 
+        }
+        
+    }
+    
 };
 
 selectArea.onclick= function(e){
@@ -115,7 +148,8 @@ function tableHtmlGenerator(selectedRegion,selectedProduct, filtered_data) {
             table_html =table_html +"<td>"+filtered_data[i].product+"</td>";
             for(var j in filtered_data[i].sale)
             {
-                table_html =table_html +"<td>"+"<input type=\"number\" class=\"tableInput\" value="+filtered_data[i].sale[j]+">"+"</td>";
+                table_html =table_html +"<td>"+"<input type=\"number\" class=\"tableInput\" \
+                data-region=\"" +filtered_data[i].region+ "\" data-product=\""+filtered_data[i].product+"\" data-mouth=\""+j+"\" value="+filtered_data[i].sale[j]+">"+"</td>";
             }
             table_html =table_html +"</tr>";
         }
@@ -139,7 +173,8 @@ function tableHtmlGenerator(selectedRegion,selectedProduct, filtered_data) {
             table_html =table_html +"<td>"+filtered_data[i].region+"</td>";
             for(var j in filtered_data[i].sale)
             {
-                table_html =table_html +"<td>"+"<input type=\"number\" class=\"tableInput\" value="+filtered_data[i].sale[j]+">"+"</td>";
+                table_html =table_html +"<td>"+"<input type=\"number\" class=\"tableInput\" "+
+                "data-region=\"" +filtered_data[i].region+ "\" data-product=\""+filtered_data[i].product+"\" data-mouth=\""+j+"\" value="+filtered_data[i].sale[j]+">"+"</td>";
             }
             table_html =table_html +"</tr>";
         }
@@ -147,3 +182,4 @@ function tableHtmlGenerator(selectedRegion,selectedProduct, filtered_data) {
     }
     return table_html;
 }
+
